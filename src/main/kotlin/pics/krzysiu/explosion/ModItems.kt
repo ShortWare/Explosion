@@ -6,18 +6,12 @@ import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
+import net.minecraft.util.Rarity
+import pics.krzysiu.explosion.items.KrzysNiskiItem
 
 object ModItems {
-    val itemSettings = Item.Settings()
-
-    init {
-        itemSettings.maxCount(17)
-    }
-
-    val KRZYS_NISKI: Item =
-        register("krzys_jest_niski", ::Item, Item.Settings())
-
     fun initialize() {
+        KrzysNiskiItem.INSTANCE
     }
 
     fun register(
