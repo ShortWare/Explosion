@@ -8,6 +8,12 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 
 object ModItems {
+    val itemSettings = Item.Settings()
+
+    init {
+        itemSettings.maxCount(17)
+    }
+
     val KRZYS_NISKI: Item =
         register("krzys_jest_niski", ::Item, Item.Settings())
 
