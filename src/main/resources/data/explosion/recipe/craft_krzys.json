@@ -1,0 +1,19 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " # ",
+    "RAR",
+    "B/B"
+  ],
+  "key": {
+    "#": "minecraft:pink_wool",
+    "R": "minecraft:red_wool",
+    "A": "minecraft:armor_stand",
+    "B": "minecraft:blue_wool",
+    "/": "minecraft:end_rod"
+  },
+  "result": {
+    "id": "explosion:krzys_jest_niski",
+    "count": 1
+  }
+}
