@@ -4,11 +4,15 @@ import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
+import net.minecraft.item.equipment.ArmorMaterial
+import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.item.tooltip.TooltipType
+import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
 import net.minecraft.util.Rarity
 import pics.krzysiu.explosion.ModItems
+import java.util.Map
 import java.util.function.Consumer
 
 
@@ -21,7 +25,7 @@ class KrzysNiskiItem(settings: Settings) : Item(settings) {
         type: TooltipType?
     ) {
         textConsumer.accept(
-            Text.translatable("explosion.krzys_jest_niski.description").formatted(Formatting.GOLD)
+            Text.translatableWithFallback("explosion.krzys_jest_niski.description","Bardzo niski Krzyś").formatted(Formatting.GOLD)
         )
     }
 
