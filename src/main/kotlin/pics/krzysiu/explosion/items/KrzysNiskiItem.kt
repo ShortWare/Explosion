@@ -1,5 +1,6 @@
 package pics.krzysiu.explosion.items
 
+import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
@@ -31,6 +32,7 @@ class KrzysNiskiItem(settings: Settings) : Item(settings) {
             Item.Settings()
                 .maxCount(17)
                 .rarity(Rarity.EPIC)
+                .food(FoodComponent.Builder().nutrition(20).alwaysEdible().build())
         )
     }
 }
