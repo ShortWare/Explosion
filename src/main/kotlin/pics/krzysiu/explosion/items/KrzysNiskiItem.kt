@@ -2,6 +2,7 @@ package pics.krzysiu.explosion.items
 
 import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.TooltipDisplayComponent
+import net.minecraft.entity.LivingEntity
 import net.minecraft.item.Item
 import net.minecraft.item.ItemStack
 import net.minecraft.item.tooltip.TooltipType
@@ -10,7 +11,6 @@ import net.minecraft.util.Formatting
 import net.minecraft.util.Rarity
 import pics.krzysiu.explosion.ModItems
 import java.util.function.Consumer
-
 
 class KrzysNiskiItem(settings: Settings) : Item(settings) {
     override fun appendTooltip(
@@ -23,6 +23,21 @@ class KrzysNiskiItem(settings: Settings) : Item(settings) {
         textConsumer.accept(
             Text.translatable("explosion.krzys_jest_niski.description").formatted(Formatting.GOLD)
         )
+    }
+
+    override fun postHit(
+        stack: ItemStack,
+        target: LivingEntity,
+        attacker: LivingEntity
+    ) {
+        if (attacker is net.minecraft.server.network.ServerPlayerEntity) {
+            attacker.sendMessage(
+                net.minecraft.text.Text.literal("§a[Krzyś] AAAAAA"),
+                false
+            )
+        }
+
+        return super.postHit(stack, target, attacker)
     }
 
     companion object {
