@@ -1,7 +1,19 @@
 {
   "variants": {
-    "": {
+    "facing=east": {
+      "model": "explosion:block/krzys_block",
+      "y": 90
+    },
+    "facing=north": {
       "model": "explosion:block/krzys_block"
+    },
+    "facing=south": {
+      "model": "explosion:block/krzys_block",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "explosion:block/krzys_block",
+      "y": 270
     }
   }
 }
