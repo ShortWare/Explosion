@@ -1,0 +1,12 @@
+{
+  "parent": "minecraft:block/cube",
+  "textures": {
+    "down": "explosion:block/krzys_bottom",
+    "east": "explosion:block/krzys_left",
+    "north": "explosion:block/krzys_front",
+    "particle": "explosion:block/krzys_front",
+    "south": "explosion:block/krzys_back",
+    "up": "explosion:block/krzys_top",
+    "west": "explosion:block/krzys_right"
+  }
+}

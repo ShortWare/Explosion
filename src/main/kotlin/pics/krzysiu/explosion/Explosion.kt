@@ -9,6 +9,7 @@ class Explosion : ModInitializer {
 
     override fun onInitialize() {
         ModItems.initialize()
+        ModBlocks.initialize()
         LOGGER?.info("Krzyś jest niski!")
     }
 

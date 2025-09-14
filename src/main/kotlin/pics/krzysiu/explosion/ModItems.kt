@@ -13,6 +13,7 @@ import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.text.Text
 import net.minecraft.util.Identifier
+import pics.krzysiu.explosion.blocks.KrzysNiskiBlock
 import pics.krzysiu.explosion.items.KrzysNiskiItem
 import java.util.function.Supplier
 
@@ -34,6 +35,7 @@ object ModItems {
         ItemGroupEvents.modifyEntriesEvent(itemGroupKey)
             .register(ModifyEntries { itemGroup: FabricItemGroupEntries? ->
                 itemGroup?.add(KrzysNiskiItem.INSTANCE)
+                itemGroup?.add(KrzysNiskiBlock.INSTANCE)
             })
     }
 
