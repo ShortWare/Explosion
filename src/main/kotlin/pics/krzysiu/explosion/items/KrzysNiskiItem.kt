@@ -1,6 +1,7 @@
 package pics.krzysiu.explosion.items
 
 import com.google.common.base.CharMatcher
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.LivingEntity
@@ -22,6 +23,7 @@ import net.minecraft.util.Rarity
 import net.minecraft.util.packrat.ParseResults
 import pics.krzysiu.explosion.ModItems
 import pics.krzysiu.explosion.ModSounds
+import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
 import java.util.Map
 import java.util.function.Consumer
 
@@ -49,7 +51,7 @@ class KrzysNiskiItem(settings: Settings) : Item(settings) {
                 false
             )
 
-            attacker.playSoundToPlayer(ModSounds.KRZYSIU_AI, SoundCategory.PLAYERS,3f,1f)
+            ServerPlayNetworking.send(attacker, PlaySoundS2CPayload(ModSounds.KRZYSIU_AI));
         }
 
         return super.postHit(stack, target, attacker)
