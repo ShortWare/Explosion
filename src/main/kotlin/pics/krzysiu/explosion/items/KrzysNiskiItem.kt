@@ -1,5 +1,6 @@
 package pics.krzysiu.explosion.items
 
+import com.google.common.base.CharMatcher
 import net.minecraft.component.type.FoodComponent
 import net.minecraft.component.type.TooltipDisplayComponent
 import net.minecraft.entity.LivingEntity
@@ -8,11 +9,19 @@ import net.minecraft.item.ItemStack
 import net.minecraft.item.equipment.ArmorMaterial
 import net.minecraft.item.equipment.EquipmentType
 import net.minecraft.item.tooltip.TooltipType
+import net.minecraft.registry.Registries
+import net.minecraft.registry.Registry
+import net.minecraft.server.command.ServerCommandSource
+import net.minecraft.sound.SoundCategory
+import net.minecraft.sound.SoundEvent
 import net.minecraft.sound.SoundEvents
 import net.minecraft.text.Text
 import net.minecraft.util.Formatting
+import net.minecraft.util.Identifier
 import net.minecraft.util.Rarity
+import net.minecraft.util.packrat.ParseResults
 import pics.krzysiu.explosion.ModItems
+import pics.krzysiu.explosion.ModSounds
 import java.util.Map
 import java.util.function.Consumer
 
@@ -36,9 +45,11 @@ class KrzysNiskiItem(settings: Settings) : Item(settings) {
     ) {
         if (attacker is net.minecraft.server.network.ServerPlayerEntity) {
             attacker.sendMessage(
-                net.minecraft.text.Text.literal("§a[Krzyś] AAAAAA"),
+                Text.literal("§a[Krzyś] AAAAAA"),
                 false
             )
+
+            attacker.playSoundToPlayer(ModSounds.KRZYSIU_AI, SoundCategory.PLAYERS,3f,1f)
         }
 
         return super.postHit(stack, target, attacker)
