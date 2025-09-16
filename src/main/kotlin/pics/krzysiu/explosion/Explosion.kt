@@ -6,6 +6,7 @@ import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttribute
 import net.fabricmc.loader.api.metadata.ModEnvironment
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import pics.krzysiu.explosion.entities.ChomusukeEntity
 import pics.krzysiu.explosion.entities.KrzysNiskiEntity
 import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
 
@@ -22,6 +23,7 @@ class Explosion : ModInitializer {
         ModEntities.initialize()
 
         FabricDefaultAttributeRegistry.register(ModEntities.KRZYS_NISKI_ENTITY, KrzysNiskiEntity.createAttributes())
+        FabricDefaultAttributeRegistry.register(ModEntities.CHOMUSUKE_ENTITY, ChomusukeEntity.createAttributes())
 
 
 

@@ -10,8 +10,11 @@ import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.entity.EntityType
 import pics.krzysiu.explosion.ModEntities
+import pics.krzysiu.explosion.client.entities.chomusuke.ChomusukeModel
+import pics.krzysiu.explosion.client.entities.chomusuke.ChomusukeRenderer
 import pics.krzysiu.explosion.client.entities.krzysniskientity.KrzysNiskiEntityModel
 import pics.krzysiu.explosion.client.entities.krzysniskientity.KrzysNiskiEntityRenderer
+import pics.krzysiu.explosion.entities.ChomusukeEntity
 import pics.krzysiu.explosion.entities.KrzysNiskiEntity
 import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
 
@@ -33,6 +36,18 @@ class ExplosionClient : ClientModInitializer {
 
 
 
+        /*
+
+          ______ _   _ _______ _____ _______ _____ ______  _____
+         |  ____| \ | |__   __|_   _|__   __|_   _|  ____|/ ____|
+         | |__  |  \| |  | |    | |    | |    | | | |__  | (___
+         |  __| | . ` |  | |    | |    | |    | | |  __|  \___ \
+         | |____| |\  |  | |   _| |_   | |   _| |_| |____ ____) |
+         |______|_| \_|  |_|  |_____|  |_|  |_____|______|_____/
+
+        */
+
+        // krzys_niski_entity
         EntityModelLayerRegistry.registerModelLayer(
             KrzysNiskiEntityModel.MAIN_LAYER
         ) { KrzysNiskiEntityModel.getTexturedModelData() }
@@ -41,6 +56,18 @@ class ExplosionClient : ClientModInitializer {
             ModEntities.KRZYS_NISKI_ENTITY
         ) { context ->
             KrzysNiskiEntityRenderer(context)
+        }
+
+
+        // chomusuke
+        EntityModelLayerRegistry.registerModelLayer(
+            ChomusukeModel.MAIN_LAYER
+        ) { ChomusukeModel.getTexturedModelData() }
+
+        EntityRendererRegistry.register<ChomusukeEntity>(
+            ModEntities.CHOMUSUKE_ENTITY
+        ) { context ->
+            ChomusukeRenderer(context)
         }
     }
 }
