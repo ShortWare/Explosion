@@ -1,9 +1,17 @@
 package pics.krzysiu.explosion
 
+import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
+import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
+import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.damage.DamageSource
+import net.minecraft.entity.effect.StatusEffectInstance
+import net.minecraft.entity.effect.StatusEffects
 import net.minecraft.item.Item
 import net.minecraft.item.ItemGroup
 import net.minecraft.item.ItemStack
@@ -11,16 +19,66 @@ import net.minecraft.registry.Registries
 import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
+import net.minecraft.server.network.ServerPlayerEntity
 import net.minecraft.text.Text
+import net.minecraft.util.ActionResult
 import net.minecraft.util.Identifier
 import pics.krzysiu.explosion.blocks.KrzysNiskiBlock
+import pics.krzysiu.explosion.items.DarknessSword
 import pics.krzysiu.explosion.items.KrzysNiskiItem
 import java.util.function.Supplier
+import kotlin.random.Random
 
 
 object ModItems {
     fun initialize() {
         KrzysNiskiItem.INSTANCE
+
+
+
+
+
+        DarknessSword.INSTANCE
+        AttackEntityCallback.EVENT.register(AttackEntityCallback { player, world, hand, entity, _ ->
+            val stack = player.getStackInHand(hand)
+
+            if (stack.item is DarknessSword && Random.nextBoolean()) {
+                player.sendMessage(Text.translatable("explosion.items.darkness_sword.miss"), false)
+                return@AttackEntityCallback ActionResult.FAIL
+            }
+
+            ActionResult.PASS
+        })
+        ServerTickEvents.END_SERVER_TICK.register { server ->
+            server.playerManager.playerList.forEach { player ->
+                if (player is ServerPlayerEntity) {
+                    val stack = player.mainHandStack
+                    if (stack.item is DarknessSword) {
+                        val health = player.health
+
+                        player.removeStatusEffect(StatusEffects.STRENGTH)
+
+                        when {
+                            health < 5f -> player.addStatusEffect(
+                                StatusEffectInstance(
+                                    StatusEffects.STRENGTH,
+                                    60,
+                                    2,
+                                    false,
+                                    false,
+                                    true
+                                )
+                            ) // Strength III
+                            health < 10f -> player.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, 1, 1, false, false, true)) // Strength II
+                            health < 15f -> player.addStatusEffect(StatusEffectInstance(StatusEffects.STRENGTH, 1, 0, false, false, true)) // Strength I
+                        }
+                    }
+                }
+            }
+        }
+
+
+
 
         val itemGroupKey = RegistryKey.of<ItemGroup?>(
             Registries.ITEM_GROUP.getKey(),
@@ -36,6 +94,7 @@ object ModItems {
             .register(ModifyEntries { itemGroup: FabricItemGroupEntries? ->
                 itemGroup?.add(KrzysNiskiItem.INSTANCE)
                 itemGroup?.add(KrzysNiskiBlock.INSTANCE)
+                itemGroup?.add(DarknessSword.INSTANCE)
             })
     }
 

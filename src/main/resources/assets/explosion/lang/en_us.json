@@ -1,4 +1,9 @@
 {
   "item.explosion.krzys_jest_niski": "Krzyś Jest Niski",
-  "item.explosion.krzys_block": "Block of Krzyś"
+  "item.explosion.krzys_block": "Block of Krzyś",
+  "item.explosion.darkness_sword": "Darkness's sword",
+
+  "explosion.items.darkness_sword.miss": "Missed...",
+  "explosion.items.darkness_sword.description1": "- No aim",
+  "explosion.items.darkness_sword.description2": "+ Masochism"
 }
