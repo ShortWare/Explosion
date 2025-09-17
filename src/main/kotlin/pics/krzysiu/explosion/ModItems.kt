@@ -26,6 +26,7 @@ import net.minecraft.util.Identifier
 import pics.krzysiu.explosion.blocks.KrzysNiskiBlock
 import pics.krzysiu.explosion.items.DarknessSword
 import pics.krzysiu.explosion.items.KrzysNiskiItem
+import pics.krzysiu.explosion.items.MeguminStaff
 import java.util.function.Supplier
 import kotlin.random.Random
 
@@ -33,6 +34,7 @@ import kotlin.random.Random
 object ModItems {
     fun initialize() {
         KrzysNiskiItem.INSTANCE
+        MeguminStaff.INSTANCE
 
 
 
@@ -95,6 +97,7 @@ object ModItems {
                 itemGroup?.add(KrzysNiskiItem.INSTANCE)
                 itemGroup?.add(KrzysNiskiBlock.INSTANCE)
                 itemGroup?.add(DarknessSword.INSTANCE)
+                itemGroup?.add(MeguminStaff.INSTANCE)
             })
     }
 

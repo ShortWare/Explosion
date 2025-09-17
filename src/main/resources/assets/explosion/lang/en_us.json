@@ -2,8 +2,13 @@
   "item.explosion.krzys_jest_niski": "Krzyś Jest Niski",
   "item.explosion.krzys_block": "Block of Krzyś",
   "item.explosion.darkness_sword": "Darkness's sword",
+  "item.explosion.megumin_staff": "Megumin's staff",
 
   "explosion.items.darkness_sword.miss": "Missed...",
-  "explosion.items.darkness_sword.description1": "- No aim",
-  "explosion.items.darkness_sword.description2": "+ Masochism"
+  "explosion.items.darkness_sword.description1": "+ Masochism",
+  "explosion.items.darkness_sword.description2": "- No aim",
+
+
+  "explosion.items.megumin_staff.description1": "+ Explosion",
+  "explosion.items.megumin_staff.description2": "- Walking"
 }

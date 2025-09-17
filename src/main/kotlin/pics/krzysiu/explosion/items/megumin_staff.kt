@@ -16,7 +16,7 @@ import pics.krzysiu.explosion.ModSounds
 import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
 import java.util.function.Consumer
 
-class DarknessSword(settings: Settings) : Item(settings) {
+class MeguminStaff(settings: Settings) : Item(settings) {
     override fun appendTooltip(
         stack: ItemStack?,
         context: TooltipContext?,
@@ -24,18 +24,17 @@ class DarknessSword(settings: Settings) : Item(settings) {
         textConsumer: Consumer<Text?>,
         type: TooltipType?
     ) {
-        textConsumer.accept(Text.translatable("explosion.items.darkness_sword.description1").formatted(Formatting.GREEN))
-        textConsumer.accept(Text.translatable("explosion.items.darkness_sword.description2").formatted(Formatting.RED))
+        textConsumer.accept(Text.translatable("explosion.items.megumin_staff.description1").formatted(Formatting.GREEN))
+        textConsumer.accept(Text.translatable("explosion.items.megumin_staff.description2").formatted(Formatting.RED))
     }
 
     companion object {
         val INSTANCE: Item = ModItems.register(
-            "darkness_sword",
-            ::DarknessSword,
+            "megumin_staff",
+            ::MeguminStaff,
             Settings()
                 .maxCount(1)
                 .rarity(Rarity.EPIC)
-                .sword(ToolMaterial.NETHERITE, 3f, -2.4f)
         )
     }
 }
