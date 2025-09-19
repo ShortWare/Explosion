@@ -3,12 +3,14 @@ package pics.krzysiu.explosion
 import net.fabricmc.fabric.api.entity.event.v1.ServerLivingEntityEvents
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback
+import net.fabricmc.fabric.api.event.player.UseItemCallback
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroupEntries
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents.ModifyEntries
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.minecraft.entity.LivingEntity
+import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.damage.DamageSource
 import net.minecraft.entity.effect.StatusEffectInstance
 import net.minecraft.entity.effect.StatusEffects
@@ -20,13 +22,17 @@ import net.minecraft.registry.Registry
 import net.minecraft.registry.RegistryKey
 import net.minecraft.registry.RegistryKeys
 import net.minecraft.server.network.ServerPlayerEntity
+import net.minecraft.server.world.ServerWorld
 import net.minecraft.text.Text
 import net.minecraft.util.ActionResult
 import net.minecraft.util.Identifier
+import net.minecraft.util.math.BlockPos
+import org.joml.Vector3i
 import pics.krzysiu.explosion.blocks.KrzysNiskiBlock
 import pics.krzysiu.explosion.items.DarknessSword
 import pics.krzysiu.explosion.items.KrzysNiskiItem
 import pics.krzysiu.explosion.items.MeguminStaff
+import pics.krzysiu.explosion.magic.SpellBuilder
 import java.util.function.Supplier
 import kotlin.random.Random
 
@@ -34,7 +40,28 @@ import kotlin.random.Random
 object ModItems {
     fun initialize() {
         KrzysNiskiItem.INSTANCE
+
+
+
+
+
+
+
         MeguminStaff.INSTANCE
+        UseItemCallback.EVENT.register(UseItemCallback { player, world, hand ->
+            if (world.isClient) return@UseItemCallback ActionResult.PASS
+
+            val serverWorld = world as ServerWorld
+            val stack = player.getStackInHand(hand)
+
+            if (stack.item is MeguminStaff) {
+                SpellBuilder.castSpell(SpellBuilder.Companion.Spells.FIREBALL,projectile = true,player,serverWorld)
+            }
+
+
+            ActionResult.SUCCESS
+        })
+
 
 
 

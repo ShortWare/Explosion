@@ -8,6 +8,7 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import pics.krzysiu.explosion.entities.ChomusukeEntity
 import pics.krzysiu.explosion.entities.KrzysNiskiEntity
+import pics.krzysiu.explosion.entities.MagicProjectileEntity
 import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
 
 class Explosion : ModInitializer {

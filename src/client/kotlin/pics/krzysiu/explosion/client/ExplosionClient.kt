@@ -14,8 +14,11 @@ import pics.krzysiu.explosion.client.entities.chomusuke.ChomusukeModel
 import pics.krzysiu.explosion.client.entities.chomusuke.ChomusukeRenderer
 import pics.krzysiu.explosion.client.entities.krzysniskientity.KrzysNiskiEntityModel
 import pics.krzysiu.explosion.client.entities.krzysniskientity.KrzysNiskiEntityRenderer
+import pics.krzysiu.explosion.client.entities.magic_projectile.MagicProjectileModel
+import pics.krzysiu.explosion.client.entities.magic_projectile.MagicProjectileRenderer
 import pics.krzysiu.explosion.entities.ChomusukeEntity
 import pics.krzysiu.explosion.entities.KrzysNiskiEntity
+import pics.krzysiu.explosion.entities.MagicProjectileEntity
 import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
 
 
@@ -68,6 +71,18 @@ class ExplosionClient : ClientModInitializer {
             ModEntities.CHOMUSUKE_ENTITY
         ) { context ->
             ChomusukeRenderer(context)
+        }
+
+
+        // magic_projectile
+        EntityModelLayerRegistry.registerModelLayer(
+            MagicProjectileModel.MAIN_LAYER
+        ) { MagicProjectileModel.getTexturedModelData() }
+
+        EntityRendererRegistry.register<MagicProjectileEntity>(
+            ModEntities.MAGIC_PROJECTILE_ENTITY
+        ) { context ->
+            MagicProjectileRenderer(context)
         }
     }
 }

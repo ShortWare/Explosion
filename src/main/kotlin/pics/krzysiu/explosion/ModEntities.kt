@@ -9,6 +9,7 @@ import net.minecraft.registry.RegistryKeys
 import net.minecraft.util.Identifier
 import pics.krzysiu.explosion.entities.ChomusukeEntity
 import pics.krzysiu.explosion.entities.KrzysNiskiEntity
+import pics.krzysiu.explosion.entities.MagicProjectileEntity
 
 object ModEntities {
 
@@ -31,6 +32,17 @@ object ModEntities {
                 .dimensions(1f, 1f)
                 .build(
                 RegistryKey.of(RegistryKeys.ENTITY_TYPE,Identifier.of(Explosion.MOD_ID,"chomusuke"))
+            )
+        )
+
+    val MAGIC_PROJECTILE_ENTITY: EntityType<MagicProjectileEntity> =
+        Registry.register(
+            Registries.ENTITY_TYPE,
+            Identifier.of("explosion", "magic_projectile"),
+            EntityType.Builder.create<MagicProjectileEntity>(::MagicProjectileEntity, SpawnGroup.MISC)
+                .dimensions(0.5f, 0.5f)
+                .build(
+                RegistryKey.of(RegistryKeys.ENTITY_TYPE,Identifier.of(Explosion.MOD_ID,"magic_projectile"))
             )
         )
 
