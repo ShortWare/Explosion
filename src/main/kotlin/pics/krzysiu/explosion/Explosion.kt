@@ -2,6 +2,7 @@ package pics.krzysiu.explosion
 
 import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.loader.api.metadata.ModEnvironment
 import org.slf4j.Logger
@@ -37,6 +38,11 @@ class Explosion : ModInitializer {
             PlaySoundS2CPayload.CODEC);
 
 
+
+
+        ServerPlayConnectionEvents.JOIN.register(ServerPlayConnectionEvents.Join { handler, _, _ ->
+            val player = handler.player
+        })
 
 
 
