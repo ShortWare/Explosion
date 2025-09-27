@@ -4,6 +4,7 @@
   "package": "pics.krzysiu.explosion.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "ModEntityDataSaverMixin"
   ],
   "injectors": {
     "defaultRequire": 1

@@ -5,6 +5,7 @@ import net.minecraft.entity.SpawnReason
 import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.server.world.ServerWorld
 import net.minecraft.util.math.BlockPos
+import pics.krzysiu.explosion.IEntityDataSaver
 import pics.krzysiu.explosion.ModEntities
 
 class SpellBuilder {
@@ -12,6 +13,14 @@ class SpellBuilder {
     companion object {
 
         fun castSpell(spell: Spells, projectile: Boolean = false, caster: PlayerEntity, serverWorld: ServerWorld, target: Entity? = null) {
+            val cost = SpellRegistry[spell]?.cost ?: 0
+
+            val mana = ManaHandler.getMana(caster as IEntityDataSaver)
+            if (mana < cost) return
+
+            ManaHandler.alterMana(caster as IEntityDataSaver,-cost)
+
+
 
             if (projectile) {
                 val projectile = ModEntities.MAGIC_PROJECTILE_ENTITY.spawn(

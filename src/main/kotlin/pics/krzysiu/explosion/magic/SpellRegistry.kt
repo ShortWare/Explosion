@@ -5,7 +5,7 @@ import net.minecraft.entity.player.PlayerEntity
 import net.minecraft.util.math.BlockPos
 import net.minecraft.util.math.Direction
 import net.minecraft.world.World
-
+import pics.krzysiu.explosion.IEntityDataSaver
 
 
 open class Spell(val cost: Int) {
@@ -16,7 +16,7 @@ open class Spell(val cost: Int) {
 
 
 
-private class Fireball : Spell(cost = 0) {
+private class Fireball : Spell(cost = 50) {
     override fun cast(caster: PlayerEntity, blockPos: BlockPos, world: World, target: Entity?): Boolean {
         world.setBlockState(blockPos, Blocks.FIRE.defaultState, 3)
         world.setBlockState(blockPos.offset(Direction.EAST,1), Blocks.FIRE.defaultState, 3)
