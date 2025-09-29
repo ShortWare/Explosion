@@ -4,6 +4,7 @@ import net.fabricmc.api.ModInitializer
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerTickEvents
 import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking
 import net.fabricmc.fabric.api.`object`.builder.v1.entity.FabricDefaultAttributeRegistry
 import net.fabricmc.loader.api.metadata.ModEnvironment
 import net.minecraft.nbt.NbtCompound
@@ -15,6 +16,7 @@ import pics.krzysiu.explosion.entities.KrzysNiskiEntity
 import pics.krzysiu.explosion.entities.MagicProjectileEntity
 import pics.krzysiu.explosion.magic.ManaHandler
 import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
+import pics.krzysiu.explosion.networking.UpdateManaS2CPayload
 
 interface IEntityDataSaver {
     fun getPersistentData(): NbtCompound
@@ -45,6 +47,11 @@ class Explosion : ModInitializer {
             PlaySoundS2CPayload.ID,
             PlaySoundS2CPayload.CODEC);
 
+        PayloadTypeRegistry.playS2C().register(
+            UpdateManaS2CPayload.ID,
+            UpdateManaS2CPayload.CODEC);
+
+
 
 
 
@@ -57,7 +64,8 @@ class Explosion : ModInitializer {
             oneSecUpdateCounter = 0
 
             for (player in world.players) {
-                ManaHandler.alterMana(player as IEntityDataSaver, 10)
+                val newValue = ManaHandler.alterMana(player as IEntityDataSaver, 10)
+                ServerPlayNetworking.send(player, UpdateManaS2CPayload(newValue))
             }
         }
 

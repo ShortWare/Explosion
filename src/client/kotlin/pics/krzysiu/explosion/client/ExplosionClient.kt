@@ -4,11 +4,15 @@ import net.fabricmc.api.ClientModInitializer
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking
 import net.fabricmc.fabric.api.client.rendering.v1.EntityModelLayerRegistry
 import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.hud.HudElementRegistry
+import net.fabricmc.fabric.api.client.rendering.v1.hud.VanillaHudElements
 import net.fabricmc.loader.api.metadata.ModEnvironment
 import net.minecraft.client.MinecraftClient
 import net.minecraft.client.render.entity.EntityRenderer
 import net.minecraft.client.sound.PositionedSoundInstance
 import net.minecraft.entity.EntityType
+import net.minecraft.util.Identifier
+import pics.krzysiu.explosion.Explosion
 import pics.krzysiu.explosion.ModEntities
 import pics.krzysiu.explosion.client.entities.chomusuke.ChomusukeModel
 import pics.krzysiu.explosion.client.entities.chomusuke.ChomusukeRenderer
@@ -16,10 +20,12 @@ import pics.krzysiu.explosion.client.entities.krzysniskientity.KrzysNiskiEntityM
 import pics.krzysiu.explosion.client.entities.krzysniskientity.KrzysNiskiEntityRenderer
 import pics.krzysiu.explosion.client.entities.magic_projectile.MagicProjectileModel
 import pics.krzysiu.explosion.client.entities.magic_projectile.MagicProjectileRenderer
+import pics.krzysiu.explosion.client.gui.ManaDisplay
 import pics.krzysiu.explosion.entities.ChomusukeEntity
 import pics.krzysiu.explosion.entities.KrzysNiskiEntity
 import pics.krzysiu.explosion.entities.MagicProjectileEntity
 import pics.krzysiu.explosion.networking.PlaySoundS2CPayload
+import pics.krzysiu.explosion.networking.UpdateManaS2CPayload
 
 
 class ExplosionClient : ClientModInitializer {
@@ -28,8 +34,16 @@ class ExplosionClient : ClientModInitializer {
         ClientPlayNetworking.registerGlobalReceiver<PlaySoundS2CPayload>(
             PlaySoundS2CPayload.ID
         ) { payload: PlaySoundS2CPayload?, context: ClientPlayNetworking.Context? ->
-            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(payload?.sound, 1f, 3f));
+            MinecraftClient.getInstance().getSoundManager().play(PositionedSoundInstance.master(payload?.sound, 1f, 3f))
         }
+
+        ClientPlayNetworking.registerGlobalReceiver<UpdateManaS2CPayload>(
+            UpdateManaS2CPayload.ID
+        ) { payload: UpdateManaS2CPayload?, context: ClientPlayNetworking.Context? ->
+            ManaDisplay.mana = payload?.value ?: ManaDisplay.mana
+        }
+        HudElementRegistry.attachElementBefore(VanillaHudElements.CHAT, Identifier.of(Explosion.MOD_ID, "mana_display"),
+            ManaDisplay::render)
 
 
 
